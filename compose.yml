@@ -1,0 +1,17 @@
+ services:
+  stock-back:
+    image: docker.io/sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
+    container_name: stock-back
+    restart: always
+    environment:
+      - spring.datasource.url=${DB_HOST}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
+      - JAVA_TOOL_OPTIONS=-Xss200K
+    networks:
+      - applications-network
+
+networks:
+  applications-network:
+    external: true
+    name: applications-network
