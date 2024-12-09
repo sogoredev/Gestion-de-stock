@@ -1,4 +1,4 @@
- services:
+services:
   stock-back:
     image: docker.io/sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
     container_name: stock-back
@@ -8,6 +8,8 @@
       - spring.datasource.username=${DB_USERNAME}
       - spring.datasource.password=${DB_PASSWORD}
       - JAVA_TOOL_OPTIONS=-Xss200K
+    ports:
+      - "8080:80"
     networks:
       - applications-network
 
