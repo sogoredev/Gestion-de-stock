@@ -8,8 +8,6 @@ services:
       - spring.datasource.username=${DB_USERNAME}
       - spring.datasource.password=${DB_PASSWORD}
       - JAVA_TOOL_OPTIONS=-Xss200K
-    ports:
-      - "8080:80"
     networks:
       - applications-network
 
