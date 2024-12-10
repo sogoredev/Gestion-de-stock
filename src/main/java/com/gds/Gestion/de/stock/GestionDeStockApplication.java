@@ -48,7 +48,7 @@ public class GestionDeStockApplication implements CommandLineRunner{
 		// Vérification si l'utilisateur SUPER_ADMIN existe déjà
 		String emailSuperAdmin = "super@gmail.com";
 		if (utilisateurRepository.findByEmail(emailSuperAdmin) == null) {
-			// Création de l'utilisateur SUPER_ADMIN
+			// Création d'utilisateur SUPER_ADMIN
 			Utilisateur superAdmin = Utilisateur.builder()
 					.nom("Super")
 					.prenom("Admin")
