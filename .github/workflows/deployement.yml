@@ -59,7 +59,7 @@ jobs:
           port: 22
           source: "compose.yml"
           target: /opt/applications/stock/${{env.IMAGE}}
-      - name: execut commands to run container
+      - name: execute commands to run container
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
@@ -70,5 +70,5 @@ jobs:
             echo DB_HOST="${{ secrets.DB_HOST }}" > /opt/applications/stock/${{env.IMAGE}}/.env
             echo DB_USERNAME="${{ secrets.DB_USERNAME }}" >> /opt/applications/stock/${{env.IMAGE}}/.env
             echo DB_PASSWORD="${{ secrets.DB_PASSWORD }}" >> /opt/applications/stock/${{env.IMAGE}}/.env
-            docker compose -f /opt/applications/stock/${{env.IMAGE}}/compose.yml up -d
+            docker-compose -f /opt/applications/stock/${{env.IMAGE}}/compose.yml up -d
             rm /opt/applications/stock/${{env.IMAGE}}/.env
