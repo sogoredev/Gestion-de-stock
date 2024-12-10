@@ -59,7 +59,7 @@ jobs:
           port: 22
           source: "compose.yml"
           target: /opt/applications/stock/${{env.IMAGE}}
-      - name: execute commands to run container
+      - name: execut commands to run container
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
