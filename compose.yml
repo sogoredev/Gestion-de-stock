@@ -1,13 +1,14 @@
 version: '3.7'
 services:
   backend:
-    image: sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
+    image: docker.io/sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/stock
-      - SPRING_DATASOURCE_USERNAME=stock
-      - SPRING_DATASOURCE_PASSWORD=StockBackend@2024ml
+      - spring.datasource.url=${DB_HOST}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
+      - JAVA_TOOL_OPTIONS=-Xss200K
     depends_on:
       - mysql
 
