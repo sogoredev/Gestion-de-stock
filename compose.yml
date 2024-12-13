@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   backend:
     image: docker.io/sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
