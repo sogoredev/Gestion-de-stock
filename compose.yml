@@ -1,24 +1,17 @@
 services:
-  backend:
+  stock-back:
     image: docker.io/sogoredev/gestion-de-produit:0.0.1-SNAPSHOT
     container_name: stock-back
-    ports:
-      - "8080:8080"
+    restart: always
     environment:
-      - spring.datasource.url=jdbc:mysql://mysql:3306/stock
-      - spring.datasource.username=stock
-      - spring.datasource.password=StockBackend@2024ml
+      - spring.datasource.url=${DB_HOST}
+      - spring.datasource.username=${DB_USERNAME}
+      - spring.datasource.password=${DB_PASSWORD}
       - JAVA_TOOL_OPTIONS=-Xss200K
-    depends_on:
-      - mysql
+    networks:
+      - applications-network
 
-  mysql:
-    image: mysql:8.0
-    container_name: stock-db
-    environment:
-      MYSQL_ROOT_PASSWORD: StockBackend@2024ml
-      MYSQL_DATABASE: stock
-      MYSQL_USER: stock
-      MYSQL_PASSWORD: StockBackend@2024ml
-    ports:
-      - "3306:3306"
+networks:
+  applications-network:
+    external: true
+    name: applications-network
