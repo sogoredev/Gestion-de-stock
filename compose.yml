@@ -5,15 +5,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - spring.datasource.url=jdbc:mysql://localhost:3306/stock
+      - spring.datasource.url=jdbc:mysql://mysql:3306/stock
       - spring.datasource.username=stock
-      - spring.datasource.password=StockBackend
+      - spring.datasource.password=StockBackend@2024ml
       - JAVA_TOOL_OPTIONS=-Xss200K
     depends_on:
       - mysql
 
   mysql:
     image: mysql:8.0
+    container_name: stock-db
     environment:
       MYSQL_ROOT_PASSWORD: StockBackend@2024ml
       MYSQL_DATABASE: stock
