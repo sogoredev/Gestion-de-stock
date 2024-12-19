@@ -29,13 +29,13 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - applications-network
+      - stock-network
 
 volumes:
   mysql-data:
 
 networks:
-  applications-network:
+  stock-network:
     external: true
-    name: applications-network
-    driver: brige
+    name: stock-network
+    driver: bridge
