@@ -36,6 +36,4 @@ volumes:
 
 networks:
   stock-network:
-    external: true
-    name: stock-network
     driver: bridge
