@@ -36,7 +36,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
-      - name: Copy JAR and docker-compose.yml to VPS using rsync
+      - name: Copy JAR and docker-docker-compose.yml to VPS using rsync
         run: |
           sshpass -p "${{ secrets.VPS_PASSWORD }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no -i private_key.pem" \
             /home/runner/work/Gestion-de-stock/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/root/app
