@@ -21,7 +21,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: StockBackend@2024ml
-      MYSQL_DATABASE: stock_db
+      MYSQL_DATABASE: stock
       MYSQL_USER: stock
       MYSQL_PASSWORD: StockBackend@2024ml
     ports:
