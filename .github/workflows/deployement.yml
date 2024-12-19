@@ -53,7 +53,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd /root/app/Gestion-de-stock
-            docker compose down
-            docker compose up -d --build
+            docker-compose down
+            docker-compose up -d --build
       - name: Cleanup private key
         run: rm private_key.pem
