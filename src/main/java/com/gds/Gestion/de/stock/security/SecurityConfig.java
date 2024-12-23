@@ -40,13 +40,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/user/userListe").permitAll()
 
                         .requestMatchers(POST,"/user/creer").hasRole("SUPER_ADMIN")
                         .requestMatchers(PUT, "/user/modifier/{idUser}").hasRole("SUPER_ADMIN")
                         .requestMatchers(DELETE, "/user/supprimer/{idUser}").hasRole("SUPER_ADMIN")
                         .requestMatchers(GET, "/user/{idUser}").hasRole("SUPER_ADMIN")
-                        .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
-                        .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
+//                        .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
+//                        .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
                         .requestMatchers(GET, "/user/roleListe").hasRole("SUPER_ADMIN")
 
                         .requestMatchers(POST, "/categorie/creerCat").hasAnyRole("SUPER_ADMIN", "ADMIN")
