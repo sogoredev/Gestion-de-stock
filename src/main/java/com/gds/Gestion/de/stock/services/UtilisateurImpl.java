@@ -114,6 +114,10 @@ public class UtilisateurImpl implements UserDetailsService {
 
     @Override
     public Utilisateur loadUserByUsername(String email) throws UsernameNotFoundException {
-        return this.utilisateurRepository.findByEmail(email);
+        Utilisateur utilisateur =  this.utilisateurRepository.findByEmail(email);
+        if (utilisateur == null) {
+            throw new UsernameNotFoundException("Utilisateur non trouvé : " + email);
+        }
+        return utilisateur;
     }
 }
