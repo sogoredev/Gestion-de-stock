@@ -25,20 +25,16 @@ public class SecurityController {
     private JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> conexion(@RequestBody AuthentificationDTO authentificationDTO) {
-        try {
-            Authentication authenticate = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authentificationDTO.username(), authentificationDTO.password())
-            );
-            String token = jwtService.genererToken(authentificationDTO.username()).get("bearer");
-            return ResponseEntity.ok(Map.of("token", token));
-        } catch (BadCredentialsException e) {
-            log.error("Identifiants incorrects pour l'utilisateur : " + authentificationDTO.username());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Identifiants incorrects"));
-        } catch (Exception e) {
-            log.error("Erreur lors de l'authentification : ", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Erreur serveur"));
+    private Map<String, String> conexion(@RequestBody AuthentificationDTO authentificationDTO){
+        Authentication authenticate = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authentificationDTO.username(), authentificationDTO.password())
+        );
+        if (authenticate.isAuthenticated()){
+            log.info("Resulta{}",authenticate.isAuthenticated());
+            return jwtService.genererToken(authentificationDTO.username());
         }
+
+        return null;
     }
 }
 
