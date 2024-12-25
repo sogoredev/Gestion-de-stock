@@ -11,10 +11,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**") // Applique CORS pour toutes les routes API
-                .allowedOrigins("https://stock.g2sservice.com") // Autorise le frontend à envoyer des requêtes
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Méthodes autorisées
-                .allowedHeaders("*") // Autorise tous les en-têtes
+//        test
+        registry.addMapping("/**")
+                .allowedOrigins("https://stock.g2sservice.com")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
                 .allowCredentials(true);
+//        cjnd
     }
 }
