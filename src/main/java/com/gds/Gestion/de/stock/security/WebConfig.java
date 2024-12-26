@@ -11,12 +11,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-//        test
-        registry.addMapping("/**")
-                .allowedOrigins("http://stock.g2sservice.com")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+        registry.addMapping("/api/**")
+                .allowedOrigins("https://stock.g2sservice.com")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
 
     }
 }
