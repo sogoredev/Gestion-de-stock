@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(DELETE, "/user/supprimer/{idUser}").hasRole("SUPER_ADMIN")
                         .requestMatchers(GET, "/user/{idUser}").hasRole("SUPER_ADMIN")
                         .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
+                        .requestMatchers(GET, "/user/userListe").hasRole("SUPER_ADMIN")
                         .requestMatchers(GET, "/user/roleListe").hasRole("SUPER_ADMIN")
 
                         .requestMatchers(POST, "/categorie/creerCat").hasAnyRole("SUPER_ADMIN", "ADMIN")
@@ -92,8 +93,8 @@ public class SecurityConfig {
                         .requestMatchers(PUT, "/dette/supprimerDette").hasAnyRole("SUPER_ADMIN", "ADMIN", "USER")
 
                         .anyRequest().authenticated())
-                        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -105,7 +106,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
         return daoAuthenticationProvider;
