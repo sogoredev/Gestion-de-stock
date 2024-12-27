@@ -53,7 +53,7 @@ public class GestionDeStockApplication implements CommandLineRunner{
 					.nom("Super")
 					.prenom("Admin")
 					.email(emailSuperAdmin)
-					.password(passwordEncoder.encode("sogoredev1"))
+					.password(passwordEncoder.encode("stock2024"))
 					.telephone("12345678")
 					.date(LocalDate.now())
 					.authentification(TypeAuth.FALSE)
