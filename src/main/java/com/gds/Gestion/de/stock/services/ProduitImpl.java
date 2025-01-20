@@ -30,7 +30,7 @@ public class ProduitImpl implements InterfaceProduit {
 
 
     @Override
-    public ProduitDTO enregistrerProd(ProduitDTO produitDTO) throws MontantQuantiteNullException, ProduitDupicateException, EmptyException {
+    public ProduitDTO enregistrerProd(ProduitDTO produitDTO) throws MontantQuantiteNullException{
         Produit produit = produitMapper.mapDeDtoAProd(produitDTO);
 
         if (produitDTO.getQuantite() <= 0)
