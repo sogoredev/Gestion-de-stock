@@ -33,8 +33,11 @@ public class ProduitImpl implements InterfaceProduit {
     public ProduitDTO enregistrerProd(ProduitDTO produitDTO) throws MontantQuantiteNullException, ProduitDupicateException, EmptyException {
         Produit produit = produitMapper.mapDeDtoAProd(produitDTO);
 
-        if (produitDTO.getPrixUnitaire() <= 0 || produitDTO.getQuantite() <= 0)
-            throw new MontantQuantiteNullException(produitDTO.getPrixUnitaire()+" ou"+produitDTO.getQuantite() +"doivent etre superieur a zero");
+        if (produitDTO.getQuantite() <= 0)
+            throw new MontantQuantiteNullException("La quantite doit etre superieur a 0");
+
+        if (produitDTO.getPrixUnitaire() <= 0 )
+            throw new MontantQuantiteNullException("Le montant doit etre superieur a 0");
 
         int montant = produitDTO.getPrixUnitaire() * produitDTO.getQuantite();
         produit.setMontant(montant);
