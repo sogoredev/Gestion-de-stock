@@ -39,7 +39,7 @@ public class ProduitImpl implements InterfaceProduit {
             throw new MontantQuantiteNullException("La quantite doit etre superieur a 0");
 
         if (produitDTO.getPrixUnitaire() <= 0 )
-            throw new MontantQuantiteNullException("Le montant doit etre superieur a 0");
+            throw new MontantQuantiteNullException("Le prix unitaire doit etre superieur a 0");
 
         int montant = produitDTO.getPrixUnitaire() * produitDTO.getQuantite();
         produit.setMontant(montant);
