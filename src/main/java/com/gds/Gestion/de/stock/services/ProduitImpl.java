@@ -33,6 +33,8 @@ public class ProduitImpl implements InterfaceProduit {
     public ProduitDTO enregistrerProd(ProduitDTO produitDTO) throws MontantQuantiteNullException{
         Produit produit = produitMapper.mapDeDtoAProd(produitDTO);
 
+//        verification de produit entrant
+
         if (produitDTO.getQuantite() <= 0)
             throw new MontantQuantiteNullException("La quantite doit etre superieur a 0");
 
