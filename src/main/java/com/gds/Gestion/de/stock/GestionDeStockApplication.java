@@ -46,15 +46,15 @@ public class GestionDeStockApplication implements CommandLineRunner{
 		}
 
 		// Vérification si l'utilisateur SUPER_ADMIN existe déjà
-		String emailSuperAdmin = "dev@gmail.com";
+		String emailSuperAdmin = "g2sservices@gmail.com";
 		if (utilisateurRepository.findByEmail(emailSuperAdmin) == null) {
 			// Création d'utilisateur SUPER_ADMIN
 			Utilisateur superAdmin = Utilisateur.builder()
-					.nom("dev")
-					.prenom("dev")
+					.nom("Gds")
+					.prenom("Services")
 					.email(emailSuperAdmin)
-					.password(passwordEncoder.encode("dev2024"))
-					.telephone("12345670")
+					.password(passwordEncoder.encode("stock2025"))
+					.telephone("84008969")
 					.date(LocalDate.now())
 					.authentification(TypeAuth.FALSE)
 					.activation(TypeActive.ACTIVER)
