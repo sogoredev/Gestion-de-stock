@@ -226,6 +226,7 @@ public class VenteImpl implements InterfaceVente {
     //    supprimer une vente
     @Override
     public void supprimerVente(String venteId) throws VenteNotFoundException {
+//        change
         VenteDAO venteDAO = afficherVente(venteId);
         Vente vente = venteMapper.mapDeDtoAVente(venteDAO.getVente());
         if (vente == null)
