@@ -2,6 +2,7 @@ package com.gds.Gestion.de.stock.DTOs;
 
 
 import com.gds.Gestion.de.stock.entites.Utilisateur;
+import com.gds.Gestion.de.stock.entites.VenteProduit;
 import com.gds.Gestion.de.stock.enums.SupprimerStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,6 +10,7 @@ import lombok.Data;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Data

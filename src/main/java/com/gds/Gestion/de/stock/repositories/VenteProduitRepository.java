@@ -13,6 +13,9 @@ public interface VenteProduitRepository extends JpaRepository<VenteProduit, Long
     @Query("SELECT vp FROM VenteProduit vp WHERE vp.vente.idVente = :idVente")
     List<VenteProduit> findVenteProduitsByVenteId(String idVente);
 
+//    Chercher tous les ventes avec id dans la table VenteProduit
+    List<VenteProduit> findByVenteIdVente(String idVente );
+
 
 
 

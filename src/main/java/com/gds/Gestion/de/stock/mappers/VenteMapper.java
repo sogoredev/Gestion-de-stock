@@ -21,6 +21,7 @@ public class VenteMapper {
         Vente vente = new Vente();
         BeanUtils.copyProperties(venteDTO, vente);
         vente.setClientsVente(clientMapper.mapDeDtoAClient(venteDTO.getClientDTO()));
+
         return vente;
     }
 

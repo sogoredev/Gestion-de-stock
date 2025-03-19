@@ -40,4 +40,5 @@ public class Produit {
 
     @ManyToOne
     private CategorieStock categorieStock;
+
 }

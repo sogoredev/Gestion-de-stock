@@ -1,6 +1,7 @@
 package com.gds.Gestion.de.stock.services;
 
 
+import com.gds.Gestion.de.stock.DAO.VenteDAO;
 import com.gds.Gestion.de.stock.DTOs.ApprovisionDTO;
 import com.gds.Gestion.de.stock.DTOs.ProduitDTO;
 import com.gds.Gestion.de.stock.DTOs.VenteDTO;
@@ -24,6 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -140,7 +142,7 @@ public class VenteImpl implements InterfaceVente {
 
         // Mise à jour des informations de la vente
         venteDTO.setDateVente(venteExist.getDateVente());
-        venteDTO.setSupprimerStatus(SupprimerStatus.FALSE);
+        venteDTO.setSupprimerStatus(venteExist.getSupprimerStatus());
         venteDTO.setIdVente(venteExist.getIdVente());
         venteDTO.setStatus(StatusVente.ANNULER);
         venteDTO.setClientDTO(clientMapper.mapDeClientADto(venteExist.getClientsVente()));
@@ -163,7 +165,7 @@ public class VenteImpl implements InterfaceVente {
         Vente vente = venteMapper.mapDeDtoAVente(venteDTO);
         // Mise à jour des informations de la vente
         vente.setUtilisateurVente(venteExist.getUtilisateurVente());
-        if(venteDTO.getStatus() == StatusVente.ANNULER){
+        if (venteDTO.getStatus() == StatusVente.ANNULER) {
             throw new VenteNotFoundException("Vente est deja annule");
         }
         vente.setStatus(StatusVente.TRAITER);
@@ -177,15 +179,43 @@ public class VenteImpl implements InterfaceVente {
 
     //    recuperer une vente
     @Override
-    public VenteDTO afficherVente(String idVente) throws VenteNotFoundException {
-        return venteMapper.mapDeVenteADTO(venteRepository.findById(idVente).orElseThrow(() -> new VenteNotFoundException("Vente n'existe pas")));
+    public VenteDAO afficherVente(String idVente) throws VenteNotFoundException {
+        Vente vente = venteRepository.findById(idVente).orElseThrow(() -> new VenteNotFoundException("Vente n'existe pas"));
+        VenteDTO venteDTO = venteMapper.mapDeVenteADTO(vente);
+        VenteDAO venteDAO = new VenteDAO();
+        venteDAO.setVente(venteDTO);
+        List<VenteProduit> byVenteIdVente = venteProduitRepository.findByVenteIdVente(vente.getIdVente());
+        List<Produit> listProduit = byVenteIdVente.stream().map(venteProduit -> venteProduit.getProduit()).toList();
+        venteDAO.setProduitList(listProduit);
+        return venteDAO;
     }
 
-    //  recperer la liste des vente
+    //  recuperer la liste des vente
     @Override
-    public List<VenteDTO> listerVente() {
+    public List<VenteDAO> listerVente() {
+//        recuperer la vente qui n'est pas supprimer dans allVente
         List<Vente> allVente = venteRepository.findAllBySupprimerStatusFalse();
-        return allVente.stream().map(vente -> venteMapper.mapDeVenteADTO(vente)).collect(Collectors.toList());
+//        convertir vente en venteDTO
+        List<VenteDTO> venteDTOList = allVente.stream().map(vente -> venteMapper.mapDeVenteADTO(vente)).collect(Collectors.toList());
+//        initialisation de tableau pour la liste de venteDAO
+        List<VenteDAO> venteDAOList = new ArrayList<>();
+//        Parcouri la liste de venteDAO
+        for (VenteDTO venteDto : venteDTOList) {
+//            initialiser un nouveau objet de venteDAO qui a 2 parametres vente et produit
+            VenteDAO venteDAO = new VenteDAO();
+//            ajout de vente de venteProduit dans vente de venteDAO
+            venteDAO.setVente(venteDto);
+//            recuperer id de chaque venteDTO
+            String idVente = venteMapper.mapDeDtoAVente(venteDto).getIdVente();
+//            recuperer la liste de VenteProduit avec id de vente dans la table VenteProduit
+            List<VenteProduit> venteProduitList = venteProduitRepository.findByVenteIdVente(idVente);
+//            extrait produit dans VenteProduit
+            List<Produit> listProduit = venteProduitList.stream().map(venteProduit -> venteProduit.getProduit()).toList();
+//            ajout de produit de venteProduit dans produit de venteDAO
+            venteDAO.setProduitList(listProduit);
+            venteDAOList.add(venteDAO);
+        }
+        return venteDAOList;
     }
 
     @Override
@@ -195,13 +225,11 @@ public class VenteImpl implements InterfaceVente {
 
     //    supprimer une vente
     @Override
-    public void supprimerVente(VenteDTO venteDTO) throws VenteNotFoundException {
-
-        Vente vente = venteMapper.mapDeDtoAVente(afficherVente(venteDTO.getIdVente()));
-
+    public void supprimerVente(String venteId) throws VenteNotFoundException {
+        VenteDAO venteDAO = afficherVente(venteId);
+        Vente vente = venteMapper.mapDeDtoAVente(venteDAO.getVente());
         if (vente == null)
             throw new VenteNotFoundException("Vente n'existe pas");
-
         vente.setSupprimerStatus(SupprimerStatus.TRUE);
         venteRepository.save(vente);
     }

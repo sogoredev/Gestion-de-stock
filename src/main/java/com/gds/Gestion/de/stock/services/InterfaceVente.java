@@ -1,5 +1,6 @@
 package com.gds.Gestion.de.stock.services;
 
+import com.gds.Gestion.de.stock.DAO.VenteDAO;
 import com.gds.Gestion.de.stock.DTOs.ApprovisionDTO;
 import com.gds.Gestion.de.stock.DTOs.VenteDTO;
 import com.gds.Gestion.de.stock.exceptions.EmptyException;
@@ -11,10 +12,10 @@ public interface InterfaceVente {
 
     void effectuerVente(VenteDTO venteDTO) throws Exception;
     void modifierVente(VenteDTO venteDTO) throws EmptyException, VenteNotFoundException;
-    VenteDTO afficherVente(String idVente) throws VenteNotFoundException;
-    List<VenteDTO> listerVente();
+    VenteDAO afficherVente(String idVente) throws VenteNotFoundException;
+    List<VenteDAO> listerVente();
     long totalVente();
-    void supprimerVente(VenteDTO venteDTO) throws VenteNotFoundException;
+    void supprimerVente(String venteId) throws VenteNotFoundException;
 
     void annulerVente(VenteDTO venteDTO) throws EmptyException;
 }

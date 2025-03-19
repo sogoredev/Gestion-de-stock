@@ -1,5 +1,6 @@
 package com.gds.Gestion.de.stock.controllers;
 
+import com.gds.Gestion.de.stock.DAO.VenteDAO;
 import com.gds.Gestion.de.stock.DTOs.VenteDTO;
 import com.gds.Gestion.de.stock.exceptions.*;
 import com.gds.Gestion.de.stock.services.InterfaceVente;
@@ -28,12 +29,12 @@ public class VenteController {
     }
 
     @GetMapping("/afficherVente")
-    public VenteDTO afficherVente(@Valid @RequestParam("idVente") String idVente) throws Exception {
+    public VenteDAO afficherVente(@Valid @RequestParam("idVente") String idVente) throws Exception {
         return interfaceVente.afficherVente(idVente);
     }
 
     @GetMapping("/listeVente")
-    public List<VenteDTO> listeVente() {
+    public List<VenteDAO> listeVente() {
         return interfaceVente.listerVente();
     }
 
@@ -48,7 +49,7 @@ public class VenteController {
     };
 
     @PutMapping("/supprimerVente")
-    private void supprimer(@Valid @RequestBody VenteDTO venteDTO) throws VenteNotFoundException {
-        interfaceVente.supprimerVente(venteDTO);
+    private void supprimer(@Valid @RequestBody String venteId) throws VenteNotFoundException {
+        interfaceVente.supprimerVente(venteId);
     };
 }
