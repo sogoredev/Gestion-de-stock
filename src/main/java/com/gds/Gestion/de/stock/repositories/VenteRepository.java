@@ -14,5 +14,9 @@ public interface VenteRepository extends JpaRepository<Vente, String> {
     @Query("SELECT v FROM Vente v WHERE v.supprimerStatus = 'FALSE'")
     List<Vente> findAllBySupprimerStatusFalse();
 
+    Vente findByIdVente(String idVente);
+
+
+
 
 }

@@ -92,6 +92,8 @@ public class SecurityConfig {
                         .requestMatchers(PUT, "/dette/payerDette").hasAnyRole("SUPER_ADMIN", "ADMIN", "USER")
                         .requestMatchers(PUT, "/dette/supprimerDette").hasAnyRole("SUPER_ADMIN", "ADMIN", "USER")
 
+                        .requestMatchers(GET, "/pdf/imprimer/{idVente}").hasAnyRole("SUPER_ADMIN", "ADMIN", "USER")
+
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);

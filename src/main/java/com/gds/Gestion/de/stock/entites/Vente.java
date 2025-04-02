@@ -20,8 +20,8 @@ public class Vente {
     @Id
     private String idVente;
     @Column(length = 50)
-    private String description;
-    @Column(length = 10)
+//    private String description;
+//    @Column(length = 10)
     private int quantite;
     @Column(length = 100)
     private int montant;

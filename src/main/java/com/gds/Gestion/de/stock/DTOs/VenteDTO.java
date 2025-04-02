@@ -19,7 +19,7 @@ public class VenteDTO {
 
 
     private String idVente;
-    private String description;
+//    private String description;
     private int montant;
     private int quantite;
     private int reduction;
