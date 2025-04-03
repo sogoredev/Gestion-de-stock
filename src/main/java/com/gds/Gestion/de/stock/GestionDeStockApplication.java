@@ -45,6 +45,7 @@ public class GestionDeStockApplication implements CommandLineRunner{
 			}
 		}
 
+//		test
 		// Vérification si l'utilisateur SUPER_ADMIN existe déjà
 		String emailSuperAdmin = "g2sservices@gmail.com";
 		if (utilisateurRepository.findByEmail(emailSuperAdmin) == null) {
