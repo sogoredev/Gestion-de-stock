@@ -1,7 +1,6 @@
 package com.gds.Gestion.de.stock.Input;
 
 import com.gds.Gestion.de.stock.DTOs.ProduitDTO;
-import com.gds.Gestion.de.stock.entites.Produit;
 import com.gds.Gestion.de.stock.entites.Vente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
