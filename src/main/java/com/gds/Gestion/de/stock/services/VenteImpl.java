@@ -60,7 +60,7 @@ public class VenteImpl implements InterfaceVente {
             throw new EmptyException("Sélectionner un produit !");
         }
 
-        if (venteInput.getVente().getClientsVente() == null) {
+        if (venteInput.getVente().getClientsVente() != null) {
             throw new EmptyException("Sélectionner un client !");
         }
 

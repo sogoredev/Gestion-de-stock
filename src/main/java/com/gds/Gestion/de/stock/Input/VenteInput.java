@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VenteInput {
+//    test
     private int idVenteProduit;
     private int quantite;
     private int reduction;
