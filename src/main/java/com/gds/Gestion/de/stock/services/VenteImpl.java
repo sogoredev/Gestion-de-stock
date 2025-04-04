@@ -51,7 +51,7 @@ public class VenteImpl implements InterfaceVente {
 
     private ProduitMapper produitMapper;
 
-    //    ajouter une vente
+    //    ajouter une ventenksja
     @Override
     public void effectuerVente(VenteInput venteInput) throws Exception {
 
