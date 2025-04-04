@@ -51,7 +51,7 @@ public class VenteImpl implements InterfaceVente {
 
     private ProduitMapper produitMapper;
 
-    //    ajouter une ventenksjabjnkcsnnkw mdvc ,sd
+    //    ajouter une ventenksjabjnkcsnnkw mdvc ,sd mscmscmsd
     @Override
     public void effectuerVente(VenteInput venteInput) throws Exception {
 
