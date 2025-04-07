@@ -23,8 +23,4 @@ public class ClientInput {
     private String adresse;
     private String telephone;
     private String email;
-    private LocalDate dateAjout;
-    private SupprimerStatus supprimerStatus;
-
-    private Utilisateur utilisateurClient;
 }

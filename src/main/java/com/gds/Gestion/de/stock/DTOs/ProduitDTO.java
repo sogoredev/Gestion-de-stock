@@ -6,7 +6,9 @@ import com.gds.Gestion.de.stock.entites.VenteProduit;
 import com.gds.Gestion.de.stock.enums.SupprimerStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
@@ -14,6 +16,8 @@ import java.util.List;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProduitDTO {
 
     private String idProd;

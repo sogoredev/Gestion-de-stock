@@ -9,13 +9,17 @@ import com.gds.Gestion.de.stock.enums.SupprimerStatus;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DetteDTO {
 
     private String idDette;

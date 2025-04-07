@@ -21,7 +21,6 @@ public class VenteController {
 
     @PostMapping("/effectuerVente")
     public void effectuerVente(@Valid @RequestBody VenteInput venteInput) throws Exception {
-        System.out.println(venteInput.getVente()+"++++++++++++++++++++");
         interfaceVente.effectuerVente(venteInput);
     }
 

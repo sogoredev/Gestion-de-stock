@@ -3,6 +3,7 @@ package com.gds.Gestion.de.stock.mappers;
 
 import com.gds.Gestion.de.stock.DTOs.ClientDTO;
 import com.gds.Gestion.de.stock.DTOs.ProduitDTO;
+import com.gds.Gestion.de.stock.Input.ClientInput;
 import com.gds.Gestion.de.stock.entites.Client;
 import com.gds.Gestion.de.stock.entites.Produit;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,12 @@ public class ClientMapper {
         ClientDTO clientDTO = new ClientDTO();
         BeanUtils.copyProperties(client, clientDTO);
         return clientDTO;
+    }
+
+    public Client mapDeClientInputAClient(ClientInput clientInput) {
+        Client client = new Client();
+        BeanUtils.copyProperties(clientInput, client);
+        return client;
     }
 
 }

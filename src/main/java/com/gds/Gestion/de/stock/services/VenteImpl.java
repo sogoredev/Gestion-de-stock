@@ -6,10 +6,7 @@ import com.gds.Gestion.de.stock.DTOs.ApprovisionDTO;
 import com.gds.Gestion.de.stock.DTOs.ProduitDTO;
 import com.gds.Gestion.de.stock.DTOs.VenteDTO;
 import com.gds.Gestion.de.stock.Input.VenteInput;
-import com.gds.Gestion.de.stock.entites.Produit;
-import com.gds.Gestion.de.stock.entites.Utilisateur;
-import com.gds.Gestion.de.stock.entites.Vente;
-import com.gds.Gestion.de.stock.entites.VenteProduit;
+import com.gds.Gestion.de.stock.entites.*;
 import com.gds.Gestion.de.stock.enums.StatusVente;
 import com.gds.Gestion.de.stock.enums.SupprimerStatus;
 import com.gds.Gestion.de.stock.exceptions.*;
@@ -17,9 +14,11 @@ import com.gds.Gestion.de.stock.mappers.ClientMapper;
 import com.gds.Gestion.de.stock.mappers.ProduitMapper;
 import com.gds.Gestion.de.stock.mappers.VenteInputMapper;
 import com.gds.Gestion.de.stock.mappers.VenteMapper;
+import com.gds.Gestion.de.stock.repositories.ClientRepository;
 import com.gds.Gestion.de.stock.repositories.ProduitRepository;
 import com.gds.Gestion.de.stock.repositories.VenteProduitRepository;
 import com.gds.Gestion.de.stock.repositories.VenteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -46,10 +46,13 @@ public class VenteImpl implements InterfaceVente {
     private VenteRepository venteRepository;
 
     private VenteProduitRepository venteProduitRepository;
+    private ClientRepository clientRepository;
 
     private ProduitRepository produitRepository;
 
     private ProduitMapper produitMapper;
+
+//    private ClientMapper clientMapper;
 
     //    ajouter une ventenksjabjnkcsnnkw mdvc ,sd mscmscmsd
     @Override
@@ -60,8 +63,8 @@ public class VenteImpl implements InterfaceVente {
             throw new EmptyException("Sélectionner un produit !");
         }
 
-        if (venteInput.getVente().getClientsVente() != null) {
-            throw new EmptyException("Sélectionner un client !");
+        if (venteInput.getClientInput() == null) {
+            throw new EmptyException("Veuillez sélectionner un client !");
         }
 
         // Création de la vente
@@ -71,6 +74,7 @@ public class VenteImpl implements InterfaceVente {
         vente.setStatus(StatusVente.TRAITER);
         vente.setSupprimerStatus(SupprimerStatus.FALSE);
         vente.setDateVente(LocalDate.now());
+//        vente.setClientsVente(client);
         vente.setIdVente("GDS" + UUID.randomUUID());
 
         // Initialiser le montant total et la quantité totale
@@ -121,6 +125,7 @@ public class VenteImpl implements InterfaceVente {
             venteProduit.setVente(saveVente);
             venteProduit.setMontant(produit.getPrixUnitaire() * venteInput.getQuantite() - venteInput.getReduction());
             venteProduit.setQuantite(venteInput.getQuantite());
+            System.out.println(venteInput.getQuantite() + "=================");
             venteProduitRepository.save(venteProduit);
         }
     }

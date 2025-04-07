@@ -7,7 +7,9 @@ import com.gds.Gestion.de.stock.enums.StatusVente;
 import com.gds.Gestion.de.stock.enums.SupprimerStatus;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
@@ -15,6 +17,8 @@ import java.util.List;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class VenteDTO {
 
 
